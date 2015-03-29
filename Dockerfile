@@ -22,11 +22,8 @@ RUN apt-get update && \
 # Download Pentaho BI Server
 #RUN /usr/bin/wget -nv http://softlayer-sng.dl.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.2/biserver-ce-${BISERVER_TAG}.zip -O biserver-ce-${BISERVER_TAG}.zip
 RUN /usr/bin/wget -nv http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/5.3/biserver-ce-5.3.0.0-213.zip/ -O /tmp/biserver-ce-${BISERVER_TAG}.zip 
-RUN /usr/bin/wget -nv http://meteorite.bi/downloads/saiku-plugin-p5-2.6.zip -O /tmp/saiku.zip 
 
 RUN /usr/bin/unzip -q /tmp/biserver-ce-${BISERVER_TAG}.zip -d  $PENTAHO_HOME && \
-    /usr/bin/unzip -q /tmp/saiku.zip -d  $PENTAHO_HOME/biserver-ce/pentaho-solutions/system && \
-    rm -f /tmp/saiku.zip && \
     rm -f /tmp/biserver-ce-${BISERVER_TAG}.zip $PENTAHO_HOME/biserver-ce/promptuser.sh && \
     sed -i -e 's/\(exec ".*"\) start/\1 run/' /opt/pentaho/biserver-ce/tomcat/bin/startup.sh && \
     chmod +x $PENTAHO_HOME/biserver-ce/start-pentaho.sh
